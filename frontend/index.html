@@ -1,0 +1,1457 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>EcoImpact — Gamified Carbon Reduction for Climate Action</title>
+  
+  <!-- Fonts & Meta -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+  <!-- Light-green Stylesheets -->
+  <link rel="stylesheet" href="css/styles.css?v=2">
+  <link rel="stylesheet" href="css/components.css?v=2">
+  <link rel="stylesheet" href="css/animations.css?v=2">
+</head>
+<body>
+
+  <div class="app-layout">
+    <!-- =====================================================================
+         SIDEBAR NAVIGATION
+         ===================================================================== -->
+    <aside class="sidebar">
+      <div class="sidebar-header">
+        <div class="brand-icon">🌱</div>
+        <div class="brand-info">
+          <h1>EcoImpact</h1>
+          <div class="brand-tagline">Play Green. Live Clean.</div>
+        </div>
+      </div>
+
+      <nav class="sidebar-nav">
+        <div class="nav-section-title">Overview</div>
+        <a class="nav-item active" data-view="landing">
+          <span class="icon">🌐</span>
+          <span>Project Landing</span>
+        </a>
+        <a class="nav-item" data-view="dashboard">
+          <span class="icon">🎮</span>
+          <span>Gaming Dashboard</span>
+          <span class="nav-badge" id="sideBadgeLevel">Lvl 2</span>
+        </a>
+
+        <div class="nav-section-title">Carbon Analytics</div>
+        <a class="nav-item" data-view="calculator">
+          <span class="icon">📊</span>
+          <span>Activity & Calculator</span>
+        </a>
+        <a class="nav-item" data-view="hotspots">
+          <span class="icon">🔥</span>
+          <span>Emission Hotspots</span>
+          <span class="nav-badge" style="background: #FEE2E2; color: #991B1B;">Hotspot</span>
+        </a>
+        <a class="nav-item" data-view="coach">
+          <span class="icon">🤖</span>
+          <span>AI Eco Coach</span>
+          <span class="nav-badge">AI</span>
+        </a>
+        <a class="nav-item" data-view="simulator">
+          <span class="icon">🧪</span>
+          <span>What-If Simulator</span>
+        </a>
+        <a class="nav-item" data-view="goals">
+          <span class="icon">🎯</span>
+          <span>Reduction Plan</span>
+        </a>
+        <a class="nav-item" data-view="sequestration">
+          <span class="icon">🌲</span>
+          <span>Carbon Sequestration</span>
+        </a>
+
+        <div class="nav-section-title">Eco Quest & Community</div>
+        <a class="nav-item" data-view="missions">
+          <span class="icon">⚡</span>
+          <span>Green Missions</span>
+          <span class="nav-badge" style="background: #FEF08A;">XP</span>
+        </a>
+        <a class="nav-item" data-view="planet">
+          <span class="icon">🌍</span>
+          <span>My Green Planet</span>
+        </a>
+        <a class="nav-item" data-view="achievements">
+          <span class="icon">🏆</span>
+          <span>Achievements</span>
+        </a>
+        <a class="nav-item" data-view="leaderboard">
+          <span class="icon">🥇</span>
+          <span>Leaderboard</span>
+        </a>
+        <a class="nav-item" data-view="analytics">
+          <span class="icon">📈</span>
+          <span>Progress & Trends</span>
+        </a>
+        <a class="nav-item" data-view="reports">
+          <span class="icon">📑</span>
+          <span>Reports & Audit</span>
+        </a>
+        <a class="nav-item" data-view="profile">
+          <span class="icon">⚙️</span>
+          <span>Profile & Settings</span>
+        </a>
+      </nav>
+
+      <div class="sidebar-footer">
+        <div class="user-avatar-sm" id="sideUserAvatar">AS</div>
+        <div class="user-info-sm">
+          <h4 id="sideUserName">Aarav Sharma</h4>
+          <p id="sideUserRank">Sprout • Level 2</p>
+        </div>
+      </div>
+    </aside>
+
+    <!-- =====================================================================
+         MAIN CONTENT AREA
+         ===================================================================== -->
+    <main class="main-content">
+      
+      <!-- TOP STATUS BAR -->
+      <header class="topbar">
+        <div class="topbar-left">
+          <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Toggle Menu">☰</button>
+          <div class="page-title-group">
+            <h2 id="pageTitleText">Gaming Dashboard — EcoQuest</h2>
+            <p id="pageSubtitleText">Play Green. Live Clean. Protect Our Planet.</p>
+          </div>
+        </div>
+
+        <div class="topbar-right">
+          <div class="eco-stat-pill hide-mobile">
+            <span class="icon">🏆</span>
+            <span id="topbarUserRank">Sprout</span>
+          </div>
+          <div class="eco-stat-pill">
+            <span class="icon">✨</span>
+            <span id="topbarUserXp">185</span> <span style="font-size: 11px; color: var(--text-muted);">XP</span>
+          </div>
+          <div class="eco-stat-pill hide-mobile">
+            <span class="icon flame-active">🔥</span>
+            <span id="topbarDailyStreak">4</span> <span style="font-size: 11px; color: var(--text-muted);">Day Streak</span>
+          </div>
+        </div>
+      </header>
+
+      <div class="page-container">
+
+        <!-- =================================================================
+             VIEW 1: LANDING PAGE
+             ================================================================= -->
+        <section id="view-landing" class="view-section active">
+          <!-- Hero Section -->
+          <div class="card" style="background: linear-gradient(135deg, #E8F5E9 0%, #D9F99D 100%); border: 1px solid #BBF7D0; margin-bottom: 24px; padding: 40px;">
+            <div style="max-width: 750px;">
+              <span class="nav-badge" style="background: #FFFFFF; font-size: 12px; margin-bottom: 12px; display: inline-block;">Climate Action Initiative • Hackathon PBL Edition</span>
+              <h1 style="font-size: 34px; font-weight: 900; color: #23412B; line-height: 1.2; margin-bottom: 14px;">
+                Understand Your Impact. Reduce Your Carbon. Shape a Greener Future.
+              </h1>
+              <p style="font-size: 16px; color: #335339; margin-bottom: 24px;">
+                Measure your carbon footprint, discover your biggest emission sources, explore smarter choices, and turn sustainability into an engaging journey.
+              </p>
+              <div style="display: flex; gap: 12px; flex-wrap: wrap;">
+                <button class="btn btn-primary btn-lg" onclick="App.navigateTo('dashboard')">
+                  Start Your Eco Journey ▶
+                </button>
+                <button class="btn btn-secondary btn-lg" onclick="App.navigateTo('calculator')">
+                  Calculate My Carbon Footprint 📊
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- 3-Step Methodology -->
+          <div style="text-align: center; margin: 36px 0 20px;">
+            <h2 style="font-size: 22px; font-weight: 800; color: var(--primary-dark);">Transparent 3-Step Climate Methodology</h2>
+            <p style="font-size: 13px; color: var(--text-muted); margin-top: 4px;">From activity measurement to AI recommendations and verified gamified habits.</p>
+          </div>
+
+          <div class="dashboard-grid">
+            <div class="card col-4" style="text-align: center;">
+              <div class="stat-icon-wrap bg-leaf" style="margin: 0 auto 14px;">1</div>
+              <h3 style="font-size: 18px; font-weight: 800; margin-bottom: 8px;">1. Measure & Hotspots</h3>
+              <p style="font-size: 13px; color: var(--text-muted);">
+                Collect activity data across transportation, residential grid electricity, LPG, diet, shopping, and waste. Derive verified emission hotspots.
+              </p>
+            </div>
+            <div class="card col-4" style="text-align: center;">
+              <div class="stat-icon-wrap bg-energy" style="margin: 0 auto 14px;">2</div>
+              <h3 style="font-size: 18px; font-weight: 800; margin-bottom: 8px;">2. Simulate & Plan</h3>
+              <p style="font-size: 13px; color: var(--text-muted);">
+                Run What-If scenarios for modal shift and energy savings. Build a 6-month measurable reduction plan with progressive monthly milestones.
+              </p>
+            </div>
+            <div class="card col-4" style="text-align: center;">
+              <div class="stat-icon-wrap bg-trophy" style="margin: 0 auto 14px;">3</div>
+              <h3 style="font-size: 18px; font-weight: 800; margin-bottom: 8px;">3. Achieve & Evolve</h3>
+              <p style="font-size: 13px; color: var(--text-muted);">
+                Earn Eco XP, level up across 5 ranks (Seedling to Planet Protector), unlock badges, and witness your Green Planet biosphere flourish!
+              </p>
+            </div>
+          </div>
+
+          <!-- PBL Literature Survey & Research Gaps Section -->
+          <div class="card" style="margin-top: 24px;">
+            <div class="card-header">
+              <div class="card-title-group">
+                <div class="card-icon">📚</div>
+                <div>
+                  <h3 class="card-title">Literature Survey & Research Gaps</h3>
+                  <div class="card-subtitle">Academic PBL Foundation & Scientific Justification</div>
+                </div>
+              </div>
+            </div>
+            <div style="overflow-x: auto;">
+              <table class="leaderboard-table">
+                <thead>
+                  <tr>
+                    <th>Existing Tool / Approach</th>
+                    <th>Identified Research Gap & Limitation</th>
+                    <th>EcoImpact Engineered Solution</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><strong>Conventional Carbon Calculators (e.g. WWF, EPA)</strong></td>
+                    <td>Static one-time estimates with no habit tracking, no feedback loop, and high drop-off.</td>
+                    <td><span style="color: #16A34A; font-weight: 700;">Deterministic gamification with 5 progression tiers, daily streaks, and evolving Green Planet.</span></td>
+                  </tr>
+                  <tr>
+                    <td><strong>Generic Sustainability Apps</strong></td>
+                    <td>Broad, unranked advice without mathematical feasibility or cost analysis.</td>
+                    <td><span style="color: #16A34A; font-weight: 700;">Weighted recommendation ranking: (0.4×Impact) + (0.25×Feasibility) + (0.2×Pref) + (0.15×Afford).</span></td>
+                  </tr>
+                  <tr>
+                    <td><strong>Carbon Offset Platforms</strong></td>
+                    <td>No what-if simulation; users cannot test choices before committing to actions.</td>
+                    <td><span style="color: #16A34A; font-weight: 700;">What-If simulation engine with instant delta recalculation and cost-saving projections.</span></td>
+                  </tr>
+                  <tr>
+                    <td><strong>Carbon Sequestration Tools</strong></td>
+                    <td>Misleading net-zero claims by immediately subtracting non-permanent biological tree offsets.</td>
+                    <td><span style="color: #16A34A; font-weight: 700;">Strict GHG Protocol compliance: Sequestration reported separately using explicit 44/12 molecular ratios.</span></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+
+        <!-- =================================================================
+             VIEW 2: GAMING DASHBOARD (ECOQUEST)
+             ================================================================= -->
+        <section id="view-dashboard" class="view-section">
+          <!-- Top Player Stats Row -->
+          <div class="dashboard-grid">
+            <div class="card stat-card col-3">
+              <div class="stat-icon-wrap bg-leaf">🌱</div>
+              <div class="stat-content">
+                <h3 id="playerTotalXp">185</h3>
+                <p>Eco XP Earned</p>
+                <span class="stat-badge badge-positive" id="playerRankName">Sprout</span>
+              </div>
+            </div>
+
+            <div class="card stat-card col-3">
+              <div class="stat-icon-wrap bg-energy">⚡</div>
+              <div class="stat-content">
+                <h3 id="playerLevelNumber">Level 2</h3>
+                <p>Current Rank</p>
+                <span class="stat-badge badge-positive" id="playerNextLevelXp">350 XP to Lvl 3</span>
+              </div>
+            </div>
+
+            <div class="card stat-card col-3">
+              <div class="stat-icon-wrap bg-flame">🔥</div>
+              <div class="stat-content">
+                <h3 id="playerDailyStreak">4 Days</h3>
+                <p>Daily Action Streak</p>
+                <span class="stat-badge badge-positive">Active Streak</span>
+              </div>
+            </div>
+
+            <div class="card stat-card col-3">
+              <div class="stat-icon-wrap bg-trophy">🏆</div>
+              <div class="stat-content">
+                <h3 id="playerUnlockedBadges">2 / 6</h3>
+                <p>Badges Unlocked</p>
+                <span class="stat-badge badge-positive">Pioneer Tier</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- XP Level Progress Bar -->
+          <div class="card" style="margin-bottom: 24px; padding: 18px 24px;">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+              <span style="font-size: 13px; font-weight: 800; color: var(--primary-dark);">Level Progression</span>
+              <span style="font-size: 12px; font-weight: 700; color: var(--primary-medium);" id="playerXpProgressLabel">20% to Next Level</span>
+            </div>
+            <div class="progress-bar-container">
+              <div class="progress-bar-fill" id="playerXpProgressFill" style="width: 20%;"></div>
+            </div>
+          </div>
+
+          <!-- Green Planet Canvas & Missions Grid -->
+          <div class="dashboard-grid">
+            <!-- Left: Interactive Green Planet Biosphere -->
+            <div class="card col-7">
+              <div class="card-header">
+                <div class="card-title-group">
+                  <div class="card-icon">🌍</div>
+                  <div>
+                    <h3 class="card-title">My Green Planet</h3>
+                    <div class="card-subtitle">Interactive evolving biosphere (Click canvas to sprout leaves)</div>
+                  </div>
+                </div>
+                <span class="nav-badge" id="planetStageBadge" style="background: var(--lime-accent);">Stage 2 / 5</span>
+              </div>
+
+              <div class="planet-canvas-container">
+                <canvas id="planetCanvas"></canvas>
+                <div class="planet-stage-indicator">
+                  <div>
+                    <strong style="font-size: 13px; color: var(--primary-dark);" id="planetStageLabel">
+                      Stage 2: Sprouting Meadow (Lush grass & wild flora)
+                    </strong>
+                    <div style="font-size: 11px; color: var(--text-muted);">Evolves automatically through completed missions & reduction milestones.</div>
+                  </div>
+                  <button class="btn btn-secondary btn-sm" onclick="App.navigateTo('planet')">Full View ↗</button>
+                </div>
+              </div>
+            </div>
+
+            <!-- Right: Quick Quests & Recommended Actions -->
+            <div class="card col-5">
+              <div class="card-header">
+                <div class="card-title-group">
+                  <div class="card-icon">⚡</div>
+                  <div>
+                    <h3 class="card-title">Active Climate Missions</h3>
+                    <div class="card-subtitle">Complete daily missions to earn Eco XP</div>
+                  </div>
+                </div>
+                <button class="btn btn-outline-green btn-sm" onclick="App.navigateTo('missions')">View All</button>
+              </div>
+
+              <!-- Quick Mission Cards -->
+              <div id="dashboardQuickMissions">
+                <div class="mission-card" style="padding: 12px;">
+                  <div class="mission-left">
+                    <div class="mission-icon">🚲</div>
+                    <div class="mission-details">
+                      <h4>Transit Commute 15 km</h4>
+                      <p>Take metro or bus this week.</p>
+                      <span class="badge-positive" style="font-size: 10px;">+50 XP</span>
+                    </div>
+                  </div>
+                  <button class="btn btn-primary btn-sm" onclick="Gamification.handleCompleteMission(1, 50)">Claim</button>
+                </div>
+
+                <div class="mission-card" style="padding: 12px;">
+                  <div class="mission-left">
+                    <div class="mission-icon">🔌</div>
+                    <div class="mission-details">
+                      <h4>Unplug Standby Chargers</h4>
+                      <p>Prevent 15 kWh monthly drain.</p>
+                      <span class="badge-positive" style="font-size: 10px;">+30 XP</span>
+                    </div>
+                  </div>
+                  <button class="btn btn-primary btn-sm" onclick="Gamification.handleCompleteMission(2, 30)">Claim</button>
+                </div>
+
+                <div class="mission-card" style="padding: 12px;">
+                  <div class="mission-left">
+                    <div class="mission-icon">🥗</div>
+                    <div class="mission-details">
+                      <h4>Meat-Free Monday Meal</h4>
+                      <p>Enjoy a delicious plant-based meal.</p>
+                      <span class="badge-positive" style="font-size: 10px;">+40 XP</span>
+                    </div>
+                  </div>
+                  <button class="btn btn-primary btn-sm" onclick="Gamification.handleCompleteMission(3, 40)">Claim</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- =================================================================
+             VIEW 3: ACTIVITY INPUT & CARBON CALCULATOR
+             ================================================================= -->
+        <section id="view-calculator" class="view-section">
+          <div class="card" style="margin-bottom: 24px;">
+            <div class="card-header">
+              <div class="card-title-group">
+                <div class="card-icon">📝</div>
+                <div>
+                  <h3 class="card-title">Activity Data Collection & Carbon Footprint Engine</h3>
+                  <div class="card-subtitle">Comprehensive data collection with transparent scientific emission factor mapping</div>
+                </div>
+              </div>
+              <div>
+                <select class="form-control" id="calcReportingPeriod" style="width: 140px;">
+                  <option value="MONTHLY" selected>Monthly Period</option>
+                  <option value="WEEKLY">Weekly Period</option>
+                  <option value="DAILY">Daily Period</option>
+                </select>
+              </div>
+            </div>
+
+            <!-- Tab Navigation for Activity Categories -->
+            <div class="tab-nav">
+              <button class="tab-btn calc-tab-btn active" data-target="tab-transport">🚗 Transportation</button>
+              <button class="tab-btn calc-tab-btn" data-target="tab-energy">⚡ Residential & Energy</button>
+              <button class="tab-btn calc-tab-btn" data-target="tab-food">🥗 Agriculture & Food</button>
+              <button class="tab-btn calc-tab-btn" data-target="tab-shopping">🛍️ Shopping & Goods</button>
+              <button class="tab-btn calc-tab-btn" data-target="tab-waste">♻️ Waste Management</button>
+              <button class="tab-btn calc-tab-btn" data-target="tab-industrial">🏭 Industrial Option</button>
+            </div>
+
+            <form id="activityForm">
+              <!-- Tab 1: Transportation -->
+              <div id="tab-transport" class="calc-tab-content">
+                <div class="dashboard-grid">
+                  <div class="form-group col-4">
+                    <label class="form-label">Vehicle Type</label>
+                    <select class="form-control" id="calcVehicleType">
+                      <option value="PETROL_CAR" selected>Petrol Passenger Car</option>
+                      <option value="DIESEL_CAR">Diesel Passenger Car</option>
+                      <option value="CNG_VEHICLE">CNG Passenger Vehicle</option>
+                      <option value="ELECTRIC_VEHICLE">Electric Vehicle (EV)</option>
+                    </select>
+                  </div>
+
+                  <div class="form-group col-4">
+                    <label class="form-label">Distance Travelled <span class="unit-badge">(km / month)</span></label>
+                    <input type="number" class="form-control" id="calcDistanceKm" value="450" step="any" required>
+                  </div>
+
+                  <div class="form-group col-4">
+                    <label class="form-label">Vehicle Mileage <span class="unit-badge">(km / litre)</span></label>
+                    <input type="number" class="form-control" id="calcMileage" value="15.0" step="any">
+                  </div>
+
+                  <div class="form-group col-4">
+                    <label class="form-label">Fuel Consumed <span class="unit-badge">(litres)</span></label>
+                    <input type="number" class="form-control" id="calcFuelLitres" value="30.0" step="any">
+                    <div class="input-hint">Formula: Distance (km) ÷ Mileage (km/L)</div>
+                  </div>
+
+                  <div class="form-group col-4">
+                    <label class="form-label">Public Transport & Bus <span class="unit-badge">(km)</span></label>
+                    <input type="number" class="form-control" id="calcPublicTransitKm" value="60" step="any">
+                  </div>
+
+                  <div class="form-group col-4">
+                    <label class="form-label">Flights Distance <span class="unit-badge">(km)</span></label>
+                    <input type="number" class="form-control" id="calcFlightKm" value="0" step="any">
+                  </div>
+                </div>
+              </div>
+
+              <!-- Tab 2: Energy & Residential -->
+              <div id="tab-energy" class="calc-tab-content" style="display: none;">
+                <div class="dashboard-grid">
+                  <div class="form-group col-4">
+                    <label class="form-label">Electricity Consumption <span class="unit-badge">(kWh)</span></label>
+                    <input type="number" class="form-control" id="calcElectricityKwh" value="240" step="any" required>
+                  </div>
+
+                  <div class="form-group col-4">
+                    <label class="form-label">Regional Electricity Grid</label>
+                    <select class="form-control" id="calcGridRegion">
+                      <option value="India National Grid" selected>India National Grid (0.82 kg/kWh - CEA)</option>
+                      <option value="USA eGRID Average">USA eGRID Average (0.386 kg/kWh - EPA)</option>
+                      <option value="EU Average">European Union Average (0.250 kg/kWh - EEA)</option>
+                    </select>
+                  </div>
+
+                  <div class="form-group col-4">
+                    <label class="form-label">LPG Cooking Cylinders / Fuel <span class="unit-badge">(kg)</span></label>
+                    <input type="number" class="form-control" id="calcLpgKg" value="14.2" step="any">
+                    <div class="input-hint">Standard 14.2 kg domestic LPG cylinder</div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Tab 3: Food & Agriculture -->
+              <div id="tab-food" class="calc-tab-content" style="display: none;">
+                <div class="dashboard-grid">
+                  <div class="form-group col-4">
+                    <label class="form-label">Dietary Pattern</label>
+                    <select class="form-control" id="calcDietType">
+                      <option value="MEAT_HEAVY_DIET">High Meat Diet (7.2 kg CO₂e/day)</option>
+                      <option value="MEDIUM_MEAT_DIET" selected>Medium Meat Diet (5.6 kg CO₂e/day)</option>
+                      <option value="VEGETARIAN_DIET">Vegetarian Diet (3.8 kg CO₂e/day)</option>
+                      <option value="VEGAN_DIET">Vegan Plant-Based (2.9 kg CO₂e/day)</option>
+                    </select>
+                  </div>
+
+                  <div class="form-group col-4">
+                    <label class="form-label">Meat Servings / Week</label>
+                    <input type="number" class="form-control" id="calcMeatServings" value="4">
+                  </div>
+
+                  <div class="form-group col-4">
+                    <label class="form-label">Food Waste Discarded <span class="unit-badge">(kg / month)</span></label>
+                    <input type="number" class="form-control" id="calcFoodWasteKg" value="3.5" step="any">
+                    <div class="input-hint">Factor: 2.50 kg CO₂e per kg food waste (FAO)</div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Tab 4: Shopping & Goods -->
+              <div id="tab-shopping" class="calc-tab-content" style="display: none;">
+                <div class="dashboard-grid">
+                  <div class="form-group col-4">
+                    <label class="form-label">New Clothing Items Bought</label>
+                    <input type="number" class="form-control" id="calcClothingItems" value="2">
+                    <div class="input-hint">Factor: 15.0 kg CO₂e / item (Ellen MacArthur)</div>
+                  </div>
+
+                  <div class="form-group col-4">
+                    <label class="form-label">Electronics / Gadgets Bought</label>
+                    <input type="number" class="form-control" id="calcElectronics" value="0">
+                    <div class="input-hint">Factor: 60.0 kg CO₂e / device life-cycle</div>
+                  </div>
+
+                  <div class="form-group col-4">
+                    <label class="form-label">General Goods Spend <span class="unit-badge">($ USD)</span></label>
+                    <input type="number" class="form-control" id="calcGoodsSpend" value="45.0" step="any">
+                    <div class="input-hint">Proxy: 0.35 kg CO₂e / USD spend</div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Tab 5: Waste Management -->
+              <div id="tab-waste" class="calc-tab-content" style="display: none;">
+                <div class="dashboard-grid">
+                  <div class="form-group col-4">
+                    <label class="form-label">Total Waste Generated <span class="unit-badge">(kg / month)</span></label>
+                    <input type="number" class="form-control" id="calcWasteKg" value="20.0" step="any">
+                  </div>
+
+                  <div class="form-group col-4">
+                    <label class="form-label">Recycled Percentage <span class="unit-badge">(%)</span></label>
+                    <input type="number" class="form-control" id="calcRecyclePct" value="25.0" step="any">
+                    <div class="input-hint">Material avoidance credit (-0.45 kg/kg)</div>
+                  </div>
+
+                  <div class="form-group col-4" style="display: flex; align-items: center; padding-top: 24px;">
+                    <label style="display: flex; align-items: center; gap: 8px; font-weight: 700; cursor: pointer;">
+                      <input type="checkbox" id="calcComposting" style="width: 18px; height: 18px;">
+                      <span>Active Balcony Composting</span>
+                    </label>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Tab 6: Industrial / Organizational Option -->
+              <div id="tab-industrial" class="calc-tab-content" style="display: none;">
+                <div class="dashboard-grid">
+                  <div class="form-group col-12">
+                    <label style="display: flex; align-items: center; gap: 8px; font-weight: 700; cursor: pointer;">
+                      <input type="checkbox" id="calcIsIndustrial" style="width: 18px; height: 18px;">
+                      <span>Include Industrial / Organizational Scope Boundary</span>
+                    </label>
+                    <div class="input-hint">Kept strictly separate from household assessment unless explicitly enabled.</div>
+                  </div>
+
+                  <div class="form-group col-6">
+                    <label class="form-label">Industrial Energy <span class="unit-badge">(kWh)</span></label>
+                    <input type="number" class="form-control" id="calcIndEnergy" value="0" step="any">
+                  </div>
+
+                  <div class="form-group col-6">
+                    <label class="form-label">Industrial Fuel <span class="unit-badge">(litres)</span></label>
+                    <input type="number" class="form-control" id="calcIndFuel" value="0" step="any">
+                  </div>
+                </div>
+              </div>
+
+              <div style="margin-top: 20px; display: flex; justify-content: flex-end; gap: 12px;">
+                <button type="submit" class="btn btn-primary btn-lg">
+                  ⚡ Calculate Carbon Footprint
+                </button>
+              </div>
+            </form>
+          </div>
+
+          <!-- Calculation Results Section -->
+          <div id="calculationResultSummary" class="card" style="display: none;">
+            <div class="card-header">
+              <div class="card-title-group">
+                <div class="card-icon">🌍</div>
+                <div>
+                  <h3 class="card-title">Assessment Results & Formula Transparency</h3>
+                  <div class="card-subtitle">Standardized internal reporting in kg CO₂e and metric tonnes</div>
+                </div>
+              </div>
+              <button class="btn btn-secondary btn-sm" onclick="App.navigateTo('hotspots')">
+                View Hotspot Ranking ▶
+              </button>
+            </div>
+
+            <div class="dashboard-grid" style="margin-bottom: 20px;">
+              <div class="card col-3" style="background: #F0FDF4; border-color: #86EFAC;">
+                <div class="stat-content">
+                  <h3 id="resTotalKg" style="color: #15803D;">542.76</h3>
+                  <p>kg CO₂e / month</p>
+                  <span class="stat-badge badge-positive">Monthly Gross</span>
+                </div>
+              </div>
+
+              <div class="card col-3" style="background: #F0FDF4; border-color: #86EFAC;">
+                <div class="stat-content">
+                  <h3 id="resTotalTonnes" style="color: #15803D;">0.5428</h3>
+                  <p>Metric Tonnes CO₂e</p>
+                  <span class="stat-badge badge-positive">Per Month</span>
+                </div>
+              </div>
+
+              <div class="card col-3" style="background: #FEF9C3; border-color: #FDE047;">
+                <div class="stat-content">
+                  <h3 id="resAnnualTonnes" style="color: #A16207;">6.51</h3>
+                  <p>Annual Projection (Tonnes)</p>
+                  <span class="stat-badge badge-warning">Assuming Unchanged</span>
+                </div>
+              </div>
+
+              <div class="card col-3" style="background: #FEE2E2; border-color: #FCA5A5;">
+                <div class="stat-content">
+                  <h3 id="resLargestCategory" style="color: #991B1B; font-size: 20px;">RESIDENTIAL</h3>
+                  <p>Primary Hotspot</p>
+                  <span class="stat-badge" style="background: #FECACA; color: #991B1B;">#1 Contributor</span>
+                </div>
+              </div>
+            </div>
+
+            <h4 style="font-size: 15px; font-weight: 800; color: var(--primary-dark); margin-bottom: 12px;">Category-Wise Emission Contributions</h4>
+            <div id="resCategoryBreakdownList">
+              <!-- Rendered dynamically by calculator.js -->
+            </div>
+          </div>
+        </section>
+
+        <!-- =================================================================
+             VIEW 4: EMISSION SOURCE HOTSPOTS
+             ================================================================= -->
+        <section id="view-hotspots" class="view-section">
+          <div class="dashboard-grid">
+            <!-- Left: Hotspot Detection Analysis -->
+            <div class="card col-6">
+              <div class="card-header">
+                <div class="card-title-group">
+                  <div class="card-icon">🔥</div>
+                  <div>
+                    <h3 class="card-title">Emission Hotspot Detection (Algorithm 4)</h3>
+                    <div class="card-subtitle">Derived from actual calculated values, not predefined assumptions</div>
+                  </div>
+                </div>
+              </div>
+
+              <div style="background: #FFF1F2; border: 1px solid #FECDD3; border-radius: var(--radius-md); padding: 16px; margin-bottom: 18px;">
+                <div style="display: flex; justify-content: space-between; align-items: center;">
+                  <div>
+                    <span style="font-size: 11px; font-weight: 800; color: #E11D48; text-transform: uppercase;">PRIMARY EMISSION HOTSPOT</span>
+                    <h3 id="hotspotPrimaryName" style="color: #9F1239; font-size: 22px; font-weight: 900;">RESIDENTIAL</h3>
+                  </div>
+                  <div style="text-align: right;">
+                    <div id="hotspotPrimaryPct" style="font-size: 24px; font-weight: 900; color: #9F1239;">44.1%</div>
+                    <div id="hotspotPrimaryKg" style="font-size: 12px; color: #BE123C;">239.17 kg CO₂e</div>
+                  </div>
+                </div>
+              </div>
+
+              <div style="background: #FFFBEB; border: 1px solid #FDE68A; border-radius: var(--radius-md); padding: 16px; margin-bottom: 20px;">
+                <div style="display: flex; justify-content: space-between; align-items: center;">
+                  <div>
+                    <span style="font-size: 11px; font-weight: 800; color: #D97706; text-transform: uppercase;">SECONDARY HOTSPOT</span>
+                    <h3 id="hotspotSecondaryName" style="color: #92400E; font-size: 20px; font-weight: 800;">FOOD & AGRICULTURE</h3>
+                  </div>
+                  <div style="text-align: right;">
+                    <div id="hotspotSecondaryPct" style="font-size: 22px; font-weight: 900; color: #92400E;">32.6%</div>
+                  </div>
+                </div>
+              </div>
+
+              <h4 style="font-size: 14px; font-weight: 800; color: var(--primary-dark); margin-bottom: 8px;">Activity-Level Hotspot Findings:</h4>
+              <ul id="hotspotActivityList" style="list-style: none; font-size: 13px; color: var(--text-muted); margin-bottom: 18px;">
+                <!-- Rendered dynamically -->
+              </ul>
+
+              <h4 style="font-size: 14px; font-weight: 800; color: var(--primary-dark); margin-bottom: 8px;">Targeted Reduction Opportunities:</h4>
+              <ul id="hotspotOpportunitiesList" style="list-style: none; font-size: 13px; color: var(--text-muted);">
+                <!-- Rendered dynamically -->
+              </ul>
+            </div>
+
+            <!-- Right: Interactive SVG Donut Chart & Ranked Table -->
+            <div class="card col-6">
+              <div class="card-header">
+                <div class="card-title-group">
+                  <div class="card-icon">🍩</div>
+                  <div>
+                    <h3 class="card-title">Emission Breakdown Chart</h3>
+                    <div class="card-subtitle">Visual distribution across categories</div>
+                  </div>
+                </div>
+              </div>
+
+              <div id="hotspotDonutContainer" style="margin-bottom: 20px;">
+                <!-- SVG Donut Chart dynamically rendered by hotspots.js -->
+              </div>
+
+              <table class="leaderboard-table">
+                <thead>
+                  <tr>
+                    <th>Rank</th>
+                    <th>Category</th>
+                    <th>Emissions</th>
+                    <th>Contribution</th>
+                  </tr>
+                </thead>
+                <tbody id="hotspotRankedTableBody">
+                  <!-- Rendered dynamically -->
+                </tbody>
+              </table>
+
+              <div style="margin-top: 20px; text-align: right;">
+                <button class="btn btn-primary" onclick="App.navigateTo('coach')">
+                  Feed Into AI Eco Coach ▶
+                </button>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- =================================================================
+             VIEW 5: AI ECO COACH & WEIGHTED RECOMMENDATIONS
+             ================================================================= -->
+        <section id="view-coach" class="view-section">
+          <div class="card" style="margin-bottom: 24px;">
+            <div class="card-header">
+              <div class="card-title-group">
+                <div class="card-icon">🤖</div>
+                <div>
+                  <h3 class="card-title">AI Eco Coach (Algorithms 1 & 2)</h3>
+                  <div class="card-subtitle">Rule-based personalization ranked by multi-variable weighted scoring</div>
+                </div>
+              </div>
+              <div style="display: flex; gap: 10px;">
+                <select class="form-control" id="coachCategoryFilter" style="width: 160px;">
+                  <option value="ALL" selected>All Categories</option>
+                  <option value="RESIDENTIAL">Residential</option>
+                  <option value="TRANSPORTATION">Transportation</option>
+                  <option value="FOOD">Food & Diet</option>
+                  <option value="SHOPPING">Shopping</option>
+                  <option value="WASTE">Waste</option>
+                </select>
+                <button class="btn btn-secondary btn-sm" id="btnRefreshRecommendations">↻ Re-Rank</button>
+              </div>
+            </div>
+
+            <div style="font-size: 12px; background: #F8FAF7; border: 1px solid var(--border-green); border-radius: var(--radius-md); padding: 12px 16px; margin-bottom: 20px;">
+              <strong>Documented Algorithm 2 Scoring Function:</strong>
+              <code>Recommendation Score = (0.40 × Normalized Impact) + (0.25 × Feasibility) + (0.20 × User Preference) + (0.15 × Affordability)</code>
+            </div>
+
+            <!-- List of recommendations -->
+            <div id="recommendationsList">
+              <!-- Rendered dynamically by coach.js -->
+            </div>
+          </div>
+        </section>
+
+        <!-- =================================================================
+             VIEW 6: WHAT-IF CARBON SIMULATOR
+             ================================================================= -->
+        <section id="view-simulator" class="view-section">
+          <div class="dashboard-grid">
+            <!-- Left: Simulation Controls -->
+            <div class="card col-5">
+              <div class="card-header">
+                <div class="card-title-group">
+                  <div class="card-icon">🧪</div>
+                  <div>
+                    <h3 class="card-title">Lifestyle Decision Simulator</h3>
+                    <div class="card-subtitle">Algorithm 3: Instant delta calculation without double-counting</div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Sliders -->
+              <div class="slider-container">
+                <div class="slider-header">
+                  <span class="slider-label">🚌 Public Transit Shift</span>
+                  <span class="slider-value" id="valTransitDays">2 days/wk</span>
+                </div>
+                <input type="range" id="simTransitDays" min="0" max="6" value="2" step="1">
+                <div class="slider-scale">
+                  <span>0 days (None)</span>
+                  <span>3 days</span>
+                  <span>6 days (Full Commute)</span>
+                </div>
+              </div>
+
+              <div class="slider-container">
+                <div class="slider-header">
+                  <span class="slider-label">🚗 Private Vehicle Travel Cut</span>
+                  <span class="slider-value" id="valTransportReduction">30%</span>
+                </div>
+                <input type="range" id="simTransportReduction" min="0" max="70" value="30" step="5">
+                <div class="slider-scale">
+                  <span>0% (No Change)</span>
+                  <span>35%</span>
+                  <span>70% (Major Cut)</span>
+                </div>
+              </div>
+
+              <div class="slider-container">
+                <div class="slider-header">
+                  <span class="slider-label">⚡ Home Electricity Efficiency</span>
+                  <span class="slider-value" id="valElectricityReduction">20%</span>
+                </div>
+                <input type="range" id="simElectricityReduction" min="0" max="60" value="20" step="5">
+                <div class="slider-scale">
+                  <span>0% (Baseline)</span>
+                  <span>30%</span>
+                  <span>60% (Deep Retrofit)</span>
+                </div>
+              </div>
+
+              <div class="form-group" style="margin-bottom: 20px;">
+                <label class="form-label" style="font-weight: 700; margin-bottom: 8px;">🥗 Proposed Dietary Shift</label>
+                <select class="form-control" id="simDietType">
+                  <option value="VEGETARIAN_DIET" selected>Lacto-Vegetarian (3.8 kg CO₂e/day)</option>
+                  <option value="VEGAN_DIET">Strict Vegan Plant-Based (2.9 kg CO₂e/day)</option>
+                  <option value="MEDIUM_MEAT_DIET">Moderate Meat Consumer (5.6 kg CO₂e/day)</option>
+                </select>
+              </div>
+
+              <div class="slider-container">
+                <div class="slider-header">
+                  <span class="slider-label">🍲 Food Waste Elimination</span>
+                  <span class="slider-value" id="valFoodWasteReduction">50%</span>
+                </div>
+                <input type="range" id="simFoodWasteReduction" min="0" max="100" value="50" step="10">
+                <div class="slider-scale">
+                  <span>0% (Standard)</span>
+                  <span>50%</span>
+                  <span>100% (Zero Waste)</span>
+                </div>
+              </div>
+
+              <div class="slider-container">
+                <div class="slider-header">
+                  <span class="slider-label">♻️ Recycling Target</span>
+                  <span class="slider-value" id="valRecyclePct">60%</span>
+                </div>
+                <input type="range" id="simRecyclePct" min="0" max="90" value="60" step="5">
+                <div class="slider-scale">
+                  <span>0% (None)</span>
+                  <span>45%</span>
+                  <span>90% (Max Sort)</span>
+                </div>
+              </div>
+
+              <div class="form-group" style="background: #F8FAF7; border: 1px solid var(--border-green); border-radius: var(--radius-md); padding: 12px 16px; margin-bottom: 16px;">
+                <label style="display: flex; align-items: center; gap: 10px; font-weight: 700; cursor: pointer; margin: 0;">
+                  <input type="checkbox" id="simComposting" checked style="width: 20px; height: 20px; accent-color: var(--primary-green);">
+                  <span>🍂 Adopt Aerobic Kitchen Composting (Avoids Methane)</span>
+                </label>
+              </div>
+
+              <button class="btn btn-primary btn-lg" id="btnSendSimToPlan" style="width: 100%; margin-top: 10px;">
+                Send Scenario to Reduction Plan ▶
+              </button>
+            </div>
+
+            <!-- Right: Real-Time Results -->
+            <div class="card col-7">
+              <div class="card-header">
+                <div class="card-title-group">
+                  <div class="card-icon">📊</div>
+                  <div>
+                    <h3 class="card-title">Simulation Outcomes & Financial Savings</h3>
+                    <div class="card-subtitle">Formula: Reduction = Baseline − Proposed</div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="stat-grid-3">
+                <div class="mini-stat-card" style="background: #F8FAF7;">
+                  <h3 id="simBaselineKg">542.8 kg</h3>
+                  <p>Current Baseline</p>
+                </div>
+
+                <div class="mini-stat-card" style="background: #ECFDF5; border-color: #A7F3D0;">
+                  <h3 id="simProposedKg" style="color: #065F46;">412.3 kg</h3>
+                  <p>Proposed Footprint</p>
+                </div>
+
+                <div class="mini-stat-card" style="background: #F0FDF4; border-color: #86EFAC;">
+                  <h3 id="simReductionKg" style="color: #15803D;">-130.5 kg</h3>
+                  <p>Monthly Savings</p>
+                  <span class="stat-badge badge-positive" id="simReductionPct">24.0% Reduction</span>
+                </div>
+              </div>
+
+              <div class="stat-grid-2">
+                <div class="mini-stat-card" style="background: #EFF6FF; border-color: #BFDBFE;">
+                  <h3 id="simAnnualAvoidedTonnes" style="color: #1E40AF;">1.566 tonnes/yr</h3>
+                  <p>Annual Avoided Emissions</p>
+                </div>
+                <div class="mini-stat-card" style="background: #FEF9C3; border-color: #FDE047;">
+                  <h3 id="simMonthlySavings" style="color: #854D0E;">$32.40 / mo</h3>
+                  <p>Est. Utility & Fuel Cost Savings</p>
+                </div>
+              </div>
+
+              <div style="font-size: 13px; color: var(--primary-dark); font-weight: 600; background: #F0FDF4; border: 1px solid #BBF7D0; padding: 12px 16px; border-radius: var(--radius-md); margin-bottom: 18px;" id="simSummaryText">
+                By adopting these sustainable lifestyle choices, you could eliminate 130.5 kg CO₂e every month.
+              </div>
+
+              <h4 style="font-size: 14px; font-weight: 800; color: var(--primary-dark); margin-bottom: 10px;">Category Comparison Diffs:</h4>
+              <div id="simComparisonBars">
+                <!-- Rendered dynamically -->
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- =================================================================
+             VIEW 7: REDUCTION PLAN & GOAL SETTING
+             ================================================================= -->
+        <section id="view-goals" class="view-section">
+          <div class="dashboard-grid">
+            <!-- Goal Setting Form -->
+            <div class="card col-5">
+              <div class="card-header">
+                <div class="card-title-group">
+                  <div class="card-icon">🎯</div>
+                  <div>
+                    <h3 class="card-title">Set Measurable Reduction Target</h3>
+                    <div class="card-subtitle">Algorithm 5: Target Emissions = Baseline × (1 − Target % ÷ 100)</div>
+                  </div>
+                </div>
+              </div>
+
+              <form id="goalForm">
+                <div class="form-group">
+                  <label class="form-label">Plan Title</label>
+                  <input type="text" class="form-control" id="goalTitle" value="6-Month Decarbonization Journey">
+                </div>
+
+                <div class="slider-container">
+                  <div class="slider-header">
+                    <span>Target Reduction Percentage</span>
+                    <span class="slider-value" id="valGoalTargetPct">20%</span>
+                  </div>
+                  <input type="range" id="goalTargetPct" min="5" max="50" value="20">
+                </div>
+
+                <div class="form-group">
+                  <label class="form-label">Plan Duration</label>
+                  <select class="form-control" id="goalDurationMonths">
+                    <option value="3">3 Months (Aggressive Sprint)</option>
+                    <option value="6" selected>6 Months (Balanced Roadmap)</option>
+                    <option value="12">12 Months (Comprehensive Annual)</option>
+                  </select>
+                </div>
+
+                <div style="background: #F8FAF7; border: 1px solid var(--border-green); padding: 14px; border-radius: var(--radius-md); margin-bottom: 20px;">
+                  <div style="display: flex; justify-content: space-between; font-size: 13px; margin-bottom: 6px;">
+                    <span>Current Baseline:</span>
+                    <strong id="goalCalcBaseline">542.8 kg</strong>
+                  </div>
+                  <div style="display: flex; justify-content: space-between; font-size: 13px; margin-bottom: 6px;">
+                    <span>Target Emissions:</span>
+                    <strong id="goalCalcTarget" style="color: #15803D;">434.2 kg</strong>
+                  </div>
+                  <div style="display: flex; justify-content: space-between; font-size: 13px;">
+                    <span>Monthly Target Cut:</span>
+                    <strong id="goalCalcReduction" style="color: #15803D;">-108.6 kg</strong>
+                  </div>
+                </div>
+
+                <button type="submit" class="btn btn-primary btn-lg" style="width: 100%;">
+                  Activate Reduction Plan ▶
+                </button>
+              </form>
+            </div>
+
+            <!-- Active Milestones Roadmap -->
+            <div class="card col-7" id="activePlanContainer" style="display: block;">
+              <div class="card-header">
+                <div class="card-title-group">
+                  <div class="card-icon">🗺️</div>
+                  <div>
+                    <h3 class="card-title" id="activePlanTitle">6-Month Decarbonization Journey</h3>
+                    <div class="card-subtitle">Progressive milestones and monthly focus areas</div>
+                  </div>
+                </div>
+                <span class="nav-badge" id="activePlanTargetPct" style="background: var(--lime-accent);">20% Target</span>
+              </div>
+
+              <div class="stat-grid-2">
+                <div class="mini-stat-card" style="background: #F0FDF4; border-color: #86EFAC;">
+                  <h3 id="activePlanTargetEmissions" style="color: #15803D;">434.2 kg CO₂e</h3>
+                  <p>Target Footprint Ceiling</p>
+                </div>
+                <div class="mini-stat-card" style="background: #F0FDF4; border-color: #86EFAC;">
+                  <h3 id="activePlanReductionAmount" style="color: #15803D;">-108.6 kg CO₂e</h3>
+                  <p>Required Total Cut</p>
+                </div>
+              </div>
+
+              <h4 style="font-size: 14px; font-weight: 800; color: var(--primary-dark); margin-bottom: 14px;">Milestone Roadmap:</h4>
+              <div id="planMilestonesRoadmap">
+                <!-- Rendered dynamically -->
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- =================================================================
+             VIEW 8: CARBON SEQUESTRATION MODULE
+             ================================================================= -->
+        <section id="view-sequestration" class="view-section">
+          <div class="card" style="margin-bottom: 24px;">
+            <div class="card-header">
+              <div class="card-title-group">
+                <div class="card-icon">🌲</div>
+                <div>
+                  <h3 class="card-title">Carbon Sequestration & Storage Estimation</h3>
+                  <div class="card-subtitle">Transparent scientific accounting using CO₂/C Molecular Ratio (44 ÷ 12 ≈ 3.6667)</div>
+                </div>
+              </div>
+            </div>
+
+            <div style="background: #FEF3C7; border-left: 4px solid #D97706; padding: 14px 18px; border-radius: var(--radius-md); font-size: 13px; color: #92400E; margin-bottom: 24px;">
+              <strong>GHG Protocol Accounting Transparency:</strong>
+              Sequestration represents biological and physical storage of atmospheric carbon. In accordance with greenhouse-gas accounting standards, stored carbon must be reported separately from gross operational footprints, rather than deducted arbitrarily without audited permanence verification.
+            </div>
+
+            <div class="dashboard-grid">
+              <div class="card col-5">
+                <h4 style="font-size: 15px; font-weight: 800; color: var(--primary-dark); margin-bottom: 14px;">Sequestration Parameters</h4>
+                
+                <div class="form-group">
+                  <label class="form-label">Sequestration Pathway</label>
+                  <select class="form-control" id="seqMethodType">
+                    <option value="BIOLOGICAL_TREE" selected>Biological Afforestation (Native Trees)</option>
+                    <option value="SOIL_ORGANIC">Soil Organic Carbon (Compost / Regenerative)</option>
+                    <option value="BLUE_CARBON">Blue Carbon (Coastal Wetland / Mangroves)</option>
+                    <option value="TECH_DAC">Direct Air Capture & Basalt Mineralization</option>
+                  </select>
+                </div>
+
+                <div class="form-group">
+                  <label class="form-label" id="lblSeqQuantity">Number of Native Trees Planted</label>
+                  <input type="number" class="form-control" id="seqQuantity" value="25" min="1">
+                  <div class="input-hint" id="helpSeqQuantity">Urban/temperate trees planted (assumes average 21.77 kg CO₂/tree/year absorption).</div>
+                </div>
+
+                <div class="form-group">
+                  <label class="form-label">Assessment Period <span class="unit-badge">(years)</span></label>
+                  <input type="number" class="form-control" id="seqTreeAge" value="5" min="1">
+                </div>
+
+                <button class="btn btn-primary" id="btnCalculateSequestration" style="width: 100%;">
+                  Calculate Stored Carbon
+                </button>
+              </div>
+
+              <div class="card col-7">
+                <h4 style="font-size: 15px; font-weight: 800; color: var(--primary-dark); margin-bottom: 14px;">Scientific Estimation Results</h4>
+
+                <div class="dashboard-grid" style="margin-bottom: 20px;">
+                  <div class="card col-6" style="background: #F0FDF4; border-color: #86EFAC;">
+                    <div class="stat-content">
+                      <h3 id="seqResCo2Kg" style="color: #15803D;">2,721.3 kg CO₂</h3>
+                      <p>Estimated CO₂ Stored</p>
+                    </div>
+                  </div>
+                  <div class="card col-6" style="background: #F0FDF4; border-color: #86EFAC;">
+                    <div class="stat-content">
+                      <h3 id="seqResCo2Tonnes" style="color: #15803D;">2.721 tonnes</h3>
+                      <p>Metric Tonnes CO₂</p>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="dashboard-grid" style="margin-bottom: 16px;">
+                  <div class="card col-6" style="background: #F8FAF7;">
+                    <div class="stat-content">
+                      <h3 id="seqResCarbonKg" style="font-size: 20px;">742.2 kg C</h3>
+                      <p>Stored Pure Carbon</p>
+                    </div>
+                  </div>
+                  <div class="card col-6" style="background: #F8FAF7;">
+                    <div class="stat-content">
+                      <h3 id="seqResUncertainty" style="font-size: 20px;">± 18%</h3>
+                      <p>Uncertainty Range</p>
+                    </div>
+                  </div>
+                </div>
+
+                <div style="font-size: 12px; background: #FCFDFB; border: 1px dashed var(--border-green); padding: 12px; border-radius: var(--radius-md);">
+                  <div><strong>Applied Scientific Formula:</strong> <span id="seqResFormula">CO₂ Stored = Dry Biomass × Carbon Fraction × (44 ÷ 12)</span></div>
+                  <div style="margin-top: 6px;"><strong>Boundary Notes:</strong> <span id="seqResNotes">Biological carbon stored in above-ground stem, foliage, and root biomass.</span></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- =================================================================
+             VIEW 9: GREEN QUEST MISSIONS
+             ================================================================= -->
+        <section id="view-missions" class="view-section">
+          <div class="card" style="margin-bottom: 24px;">
+            <div class="card-header">
+              <div class="card-title-group">
+                <div class="card-icon">⚡</div>
+                <div>
+                  <h3 class="card-title">Green Missions & Climate Quests</h3>
+                  <div class="card-subtitle">Complete daily and weekly actions to earn Eco XP and level up</div>
+                </div>
+              </div>
+            </div>
+
+            <div id="missionsListContainer">
+              <!-- Rendered dynamically by gamification.js -->
+            </div>
+          </div>
+        </section>
+
+        <!-- =================================================================
+             VIEW 10: MY GREEN PLANET (FULL SCREEN ISOMETRIC)
+             ================================================================= -->
+        <section id="view-planet" class="view-section">
+          <div class="card">
+            <div class="card-header">
+              <div class="card-title-group">
+                <div class="card-icon">🌍</div>
+                <div>
+                  <h3 class="card-title">My Green Planet Biosphere</h3>
+                  <div class="card-subtitle">Evolving interactive eco-island (Stages 1 through 5)</div>
+                </div>
+              </div>
+              <div style="display: flex; gap: 8px;">
+                <button class="btn btn-secondary btn-sm" onclick="Planet.setStage(1)">Stage 1</button>
+                <button class="btn btn-secondary btn-sm" onclick="Planet.setStage(2)">Stage 2</button>
+                <button class="btn btn-secondary btn-sm" onclick="Planet.setStage(3)">Stage 3</button>
+                <button class="btn btn-secondary btn-sm" onclick="Planet.setStage(4)">Stage 4</button>
+                <button class="btn btn-primary btn-sm" onclick="Planet.setStage(5)">Stage 5</button>
+              </div>
+            </div>
+
+            <div class="planet-canvas-container" style="height: 520px;">
+              <canvas id="planetCanvas" style="width: 100%; height: 100%;"></canvas>
+            </div>
+
+            <div style="margin-top: 18px; font-size: 12px; color: var(--text-muted); text-align: center;">
+              * Note: The Green Planet island is a gamified visualization of your personal sustainability journey and active climate achievements.
+            </div>
+          </div>
+        </section>
+
+        <!-- =================================================================
+             VIEW 11: ACHIEVEMENTS & BADGES
+             ================================================================= -->
+        <section id="view-achievements" class="view-section">
+          <div class="card">
+            <div class="card-header">
+              <div class="card-title-group">
+                <div class="card-icon">🏆</div>
+                <div>
+                  <h3 class="card-title">Achievements & Badges</h3>
+                  <div class="card-subtitle">Milestones earned through verified environmental accomplishments</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="badges-grid" id="achievementsListContainer">
+              <!-- Rendered dynamically by gamification.js -->
+            </div>
+          </div>
+        </section>
+
+        <!-- =================================================================
+             VIEW 12: COMMUNITY LEADERBOARD
+             ================================================================= -->
+        <section id="view-leaderboard" class="view-section">
+          <div class="card">
+            <div class="card-header">
+              <div class="card-title-group">
+                <div class="card-icon">🥇</div>
+                <div>
+                  <h3 class="card-title">Community Climate Leaderboard</h3>
+                  <div class="card-subtitle">Compete with peers on verified Eco XP and sustainable habits</div>
+                </div>
+              </div>
+            </div>
+
+            <table class="leaderboard-table">
+              <thead>
+                <tr>
+                  <th>Rank</th>
+                  <th>Player</th>
+                  <th>Eco Rank</th>
+                  <th>Level</th>
+                  <th>Eco XP</th>
+                  <th>Country</th>
+                </tr>
+              </thead>
+              <tbody id="leaderboardTableBody">
+                <!-- Rendered dynamically by gamification.js -->
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <!-- =================================================================
+             VIEW 13: PROGRESS & TREND ANALYTICS
+             ================================================================= -->
+        <section id="view-analytics" class="view-section">
+          <div class="card" style="margin-bottom: 24px;">
+            <div class="card-header">
+              <div class="card-title-group">
+                <div class="card-icon">📈</div>
+                <div>
+                  <h3 class="card-title">Progress & Historical Trend Analytics (Algorithm 6)</h3>
+                  <div class="card-subtitle">Comparing equivalent reporting periods and identifying decarbonization progress</div>
+                </div>
+              </div>
+              <button class="btn btn-primary btn-sm" id="btnExportCsv">
+                📥 Export CSV Report
+              </button>
+            </div>
+
+            <div class="dashboard-grid" style="margin-bottom: 20px;">
+              <div class="card col-3">
+                <div class="stat-content">
+                  <h3 id="analyticsBaselineKg">580.4 kg</h3>
+                  <p>Initial Baseline</p>
+                </div>
+              </div>
+
+              <div class="card col-3">
+                <div class="stat-content">
+                  <h3 id="analyticsCurrentKg" style="color: #15803D;">542.8 kg</h3>
+                  <p>Current Period</p>
+                </div>
+              </div>
+
+              <div class="card col-3">
+                <div class="stat-content">
+                  <h3 id="analyticsReducedKg" style="color: #15803D;">-37.6 kg</h3>
+                  <p>Carbon Cut to Date</p>
+                  <span class="stat-badge badge-positive" id="analyticsPctChange">6.5% Cut</span>
+                </div>
+              </div>
+
+              <div class="card col-3">
+                <div class="stat-content">
+                  <h3 id="analyticsAvoidedTonnes" style="color: #15803D;">0.451 t</h3>
+                  <p>Annual Avoided Tonnes</p>
+                  <span class="nav-badge badge-positive" id="analyticsTrendDirection">IMPROVING</span>
+                </div>
+              </div>
+            </div>
+
+            <h4 style="font-size: 14px; font-weight: 800; color: var(--primary-dark); margin-bottom: 12px;">Historical Reporting Periods</h4>
+            <table class="leaderboard-table">
+              <thead>
+                <tr>
+                  <th>Period</th>
+                  <th>Total Footprint</th>
+                  <th>Transport</th>
+                  <th>Energy</th>
+                  <th>Food</th>
+                  <th>Shopping</th>
+                  <th>Waste</th>
+                </tr>
+              </thead>
+              <tbody id="analyticsHistoryTableBody">
+                <!-- Rendered dynamically -->
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <!-- =================================================================
+             VIEW 14: EXECUTIVE REPORTS
+             ================================================================= -->
+        <section id="view-reports" class="view-section">
+          <div class="card">
+            <div class="card-header">
+              <div class="card-title-group">
+                <div class="card-icon">📑</div>
+                <div>
+                  <h3 class="card-title">Executive Greenhouse Gas Accounting Summary</h3>
+                  <div class="card-subtitle">Formal audit report formatted for academic PBL and hackathon presentations</div>
+                </div>
+              </div>
+              <button class="btn btn-secondary btn-sm" onclick="window.print()">🖨️ Print / Save PDF</button>
+            </div>
+
+            <div style="background: #FFFFFF; border: 1px solid var(--border-green); padding: 28px; border-radius: var(--radius-lg);">
+              <div style="display: flex; justify-content: space-between; border-bottom: 2px solid var(--soft-mint); padding-bottom: 16px; margin-bottom: 20px;">
+                <div>
+                  <h2 style="color: var(--primary-dark); font-weight: 900;">ECOIMPACT AUDIT STATEMENT</h2>
+                  <div style="font-size: 12px; color: var(--text-muted);">Reporting Boundary: Personal Consumption & Household Scope 1/2</div>
+                </div>
+                <div style="text-align: right; font-size: 12px; color: var(--text-muted);">
+                  <div>Report Date: October 2026</div>
+                  <div>Account ID: USR-001-AARAV</div>
+                </div>
+              </div>
+
+              <div class="dashboard-grid" style="margin-bottom: 20px;">
+                <div class="col-6">
+                  <h4 style="font-size: 14px; color: var(--primary-dark); margin-bottom: 8px;">1. Operational Footprint</h4>
+                  <p style="font-size: 13px; color: var(--text-muted); line-height: 1.8;">
+                    • Gross Footprint: <strong>542.76 kg CO₂e / month</strong> (0.5428 tonnes)<br>
+                    • Annualized Projection: <strong>6.51 tonnes CO₂e / year</strong><br>
+                    • Primary Emission Hotspot: <strong>Residential Energy (44.07%)</strong><br>
+                    • Secondary Hotspot: <strong>Food & Agriculture (32.57%)</strong>
+                  </p>
+                </div>
+                <div class="col-6">
+                  <h4 style="font-size: 14px; color: var(--primary-dark); margin-bottom: 8px;">2. Decarbonization Roadmap</h4>
+                  <p style="font-size: 13px; color: var(--text-muted); line-height: 1.8;">
+                    • Active Target: <strong>20% Reduction within 6 Months</strong><br>
+                    • Monthly Target Ceiling: <strong>434.2 kg CO₂e</strong><br>
+                    • Recommended Key Action: <strong>Public transit modal shift & AC 24°C setting</strong><br>
+                    • Est. Utility Savings: <strong>$32.40 / month</strong>
+                  </p>
+                </div>
+              </div>
+
+              <div style="font-size: 11px; color: var(--text-light); border-top: 1px solid var(--border-green); padding-top: 12px;">
+                Calculated using IPCC Tier 1 Default Guidelines, CEA CO₂ Baseline Database v19, and DEFRA 2023 conversion factors.
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- =================================================================
+             VIEW 15: USER PROFILE, PREFERENCES & DEMO RESET
+             ================================================================= -->
+        <section id="view-profile" class="view-section">
+          <div class="dashboard-grid">
+            <div class="card col-6">
+              <div class="card-header">
+                <div class="card-title-group">
+                  <div class="card-icon">👤</div>
+                  <div>
+                    <h3 class="card-title">User Profile & Persona</h3>
+                    <div class="card-subtitle">Hackathon demonstration account details</div>
+                  </div>
+                </div>
+              </div>
+
+              <div style="margin-bottom: 16px;">
+                <label class="form-label">Full Name</label>
+                <input type="text" class="form-control" value="Aarav Sharma" readonly>
+              </div>
+
+              <div style="margin-bottom: 16px;">
+                <label class="form-label">Username</label>
+                <input type="text" class="form-control" value="aarav_eco" readonly>
+              </div>
+
+              <div style="margin-bottom: 16px;">
+                <label class="form-label">Email</label>
+                <input type="text" class="form-control" value="aarav.sharma@ecoimpact.org" readonly>
+              </div>
+
+              <div style="margin-bottom: 16px;">
+                <label class="form-label">Country & Grid Region</label>
+                <input type="text" class="form-control" value="India • India National Grid" readonly>
+              </div>
+
+              <button class="btn btn-secondary" onclick="App.showToast('Profile settings saved.', 'success')">
+                Save Profile
+              </button>
+            </div>
+
+            <div class="card col-6">
+              <div class="card-header">
+                <div class="card-title-group">
+                  <div class="card-icon">🤖</div>
+                  <div>
+                    <h3 class="card-title">ML Eco-Persona Classifier (Algorithm 8)</h3>
+                    <div class="card-subtitle">Explainable Java K-Means Clustering on normalized activity vectors</div>
+                  </div>
+                </div>
+              </div>
+
+              <div style="font-size: 13px; color: var(--text-muted); margin-bottom: 16px;">
+                Click below to classify your emission profile against benchmark activity clusters.
+              </div>
+
+              <button class="btn btn-primary" onclick="API.getMlPersona().then(res => {
+                document.getElementById('mlPersonaOutput').style.display = 'block';
+                document.getElementById('mlPersonaTitle').textContent = res.archetypeTitle || 'High-Energy Grid Resident';
+                document.getElementById('mlPersonaDesc').textContent = res.description || '';
+                document.getElementById('mlPersonaDist').textContent = 'Distance to Centroid: ' + (res.euclideanDistanceToCentroid || 8.4);
+                App.showToast('K-Means clustering executed successfully!', 'success');
+              })">
+                ⚡ Classify My Eco Persona
+              </button>
+
+              <div id="mlPersonaOutput" style="display: none; margin-top: 18px; background: #F0FDF4; border: 1px solid #BBF7D0; padding: 14px; border-radius: var(--radius-md);">
+                <span class="nav-badge" style="background: var(--primary-dark); color: #FFFFFF; font-size: 11px;">Classified Archetype</span>
+                <h4 id="mlPersonaTitle" style="font-size: 16px; font-weight: 800; color: var(--primary-dark); margin: 6px 0;"></h4>
+                <p id="mlPersonaDesc" style="font-size: 12px; color: var(--text-muted); line-height: 1.5;"></p>
+                <div id="mlPersonaDist" style="font-size: 11px; color: var(--primary-medium); font-weight: 700; margin-top: 6px;"></div>
+              </div>
+
+              <hr style="border: 0; border-top: 1px solid var(--border-green); margin: 24px 0;">
+
+              <h4 style="font-size: 14px; font-weight: 800; color: #991B1B; margin-bottom: 8px;">Repeat Hackathon Presentation:</h4>
+              <p style="font-size: 12px; color: var(--text-muted); margin-bottom: 14px;">
+                Reset all generated scenarios, custom goals, and extra missions back to the baseline hackathon persona with one click.
+              </p>
+              <button class="btn btn-secondary" onclick="Demo.resetDemo()" style="color: #991B1B; border-color: #FCA5A5; background: #FFF1F2;">
+                🔄 Reset Demo Data
+              </button>
+            </div>
+          </div>
+        </section>
+
+      </div> <!-- /page-container -->
+    </main>
+  </div> <!-- /app-layout -->
+
+  <!-- Toast Notification Container -->
+  <div id="toastContainer" class="toast-container"></div>
+
+  <!-- Modular JavaScript Files (Strict vanilla JS, No React/Vue/Node replacements) -->
+  <script src="js/api.js?v=2"></script>
+  <script src="js/calculator.js?v=2"></script>
+  <script src="js/hotspots.js?v=2"></script>
+  <script src="js/coach.js?v=2"></script>
+  <script src="js/simulator.js?v=2"></script>
+  <script src="js/goals.js?v=2"></script>
+  <script src="js/sequestration.js?v=2"></script>
+  <script src="js/gamification.js?v=2"></script>
+  <script src="js/planet.js?v=2"></script>
+  <script src="js/analytics.js?v=2"></script>
+  <script src="js/demo.js?v=2"></script>
+  <script src="js/app.js?v=2"></script>
+</body>
+</html>
